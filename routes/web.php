@@ -27,6 +27,7 @@ Route::get('/sender', function () {
 });
 
 Route::post('sender', function () {
+    // sending pusher text
     $text = request()->text;
     event(new FormSubmitted($text));
 });
