@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Events\FormSubmitted;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/counter', function () {
-    return view('counter');
-});
+Route::get('/posts', [App\Http\Controllers\PostController::class, 'index']);
+Route::get('/post/{id}/edit', [App\Http\Controllers\PostController::class, 'edit']);
+Route::post('/edit_post', [App\Http\Controllers\PostController::class, 'update']);
+Route::post('/create_post', [App\Http\Controllers\PostController::class, 'store']);
 
-Route::get('/sender', function () {
-    return view('sender');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::post('sender', function () {
-    // sending pusher text
-    $text = request()->text;
-    event(new FormSubmitted($text));
-});
+require __DIR__.'/auth.php';
