@@ -18,7 +18,7 @@ class PostController extends Controller
         // $post = Post::where('created_at','<',now()->subDay())->first();
         // dd($post);
         $post = Post::find($id);
-        // event(new PostAlreadyOpened($id));
+        event(new PostAlreadyOpened($id));
         // broadcast(new PostAlreadyOpened($id))->toOthers();
         return view('edit_post', ['post' => $post]);
     }

@@ -20,3 +20,11 @@ use Illuminate\Support\Facades\Broadcast;
 // Broadcast::channel('post-{postId}', function ($user, $postId) {
 //     return (int) $postId === (int) \App\Models\Post::find($postId)->id;
 // });
+
+Broadcast::channel('chat', function ($user) {
+    return $user;
+});
+
+// Broadcast::channel('my-channel', function ($user) {
+//     return $user;
+// });

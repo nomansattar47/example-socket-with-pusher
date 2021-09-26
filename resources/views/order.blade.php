@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Thank you {{ $post->post_title }}, your order has been placed.</p>
+    {{--<p>Thank you {{ $post->post_title }}, your order has been placed.</p>--}}
 
 <!-- <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script> -->
 <script
@@ -16,12 +16,30 @@
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
 <script>
-// $(document).ready(function() {
-    window.Echo.channel(`post.{{$post->id}}`)
-    .listen('post-already-opened', (e) => {
-        console.log(e)
-    });
-// });
+$(document).ready(function() {
+    console.log('begin');
+    Echo.channel('home')
+        .listen('.new-message', function(e) {
+            alert(JSON.stringify(e));
+            console.log('listened');
+            console.log(e);
+        });
+    console.log('end');
+    
+    // Echo.join(`chat`)
+    // .here((users) => {
+    //     console.log(users);
+    // })
+    // .joining((user) => {
+    //     console.log(`${user.name} joined now`);
+    // })
+    // .leaving((user) => {
+    //     console.log(`${user.name} leaved`);
+    // })
+    // .error((error) => {
+    //     console.error('myError: '+error);
+    // });
+});
 </script>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    \App\Jobs\SlowJob::dispatch()->delay(5);
     return view('welcome');
+});
+
+Route::get('/order', function () {
+    // event(new \App\Events\NewMessage("hello world"));
+    return view('order');
 });
 
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index']);
