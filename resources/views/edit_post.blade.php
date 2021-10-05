@@ -16,10 +16,23 @@
     </form>
     <br><br>
     <fieldset>Update</fieldset>
-    <form action="{{ url('edit_post') }}" method="POST">
+    <form action="{{ url('edit_post') }}" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{{$post->id}}" />
     <input type="text" name="post_title" value="{{$post->post_title}}" />
     <textarea name="content">{{$post->content}}</textarea>
+    @php
+        // var_dump($post->getMedia());
+        $mediaItems = $post->getMedia('posts');
+        // if($mediaItems)
+            // $mediaItems[0]->getFullUrl();
+    @endphp
+    @isset($mediaItems)
+        @forelse ($post->getMedia('posts') as $media)
+            <img src="{{$media->getFullUrl()}}" / width="120px">
+        @empty
+            <input type="file" name="image" >
+        @endforelse
+    @endisset
     <input type="submit" />
         {{ csrf_field() }}
     </form>

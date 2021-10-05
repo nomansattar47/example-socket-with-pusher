@@ -34,6 +34,11 @@ class PostController extends Controller
     {
         // dd($request);
         $post = Post::find($request->id);
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            // $media = Media::addFromRequest('image')->toMediaCollection('posts');
+            // $post->addMedia($anotherPathToImage)->toMediaCollection('posts');
+            $post->addMediaFromRequest('image')->toMediaCollection('posts');
+        }
         $post->post_title = $request->post_title;
         $post->content = $request->content;
         $post->save();

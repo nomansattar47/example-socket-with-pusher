@@ -29,7 +29,7 @@ class UpdateInventoryAboutOrder
         // Http::post('https://inventory.company.com', [
         //     'order' => $event->order->toArray()
         // ]);
-        echo $event; die;
+
         info('Inventory was updated about order '. $event->order->id);
     }
 }
